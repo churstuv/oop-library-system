@@ -3,6 +3,7 @@
 package com.library.model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Loan {
 
@@ -19,7 +20,7 @@ public class Loan {
         this.item = item;
         this.member = member;
         this.loanDate = loanDate;
-        this.dueDate = loanDate.plusDays(item.getLoanPeriodDays());     // 날짜 더하는 함수: plusDays
+        this.dueDate = loanDate.plusDays(item.getLoanPeriodDays());     // AI: 날짜 더하는 함수 = plusDays
     }
 
 
@@ -32,10 +33,34 @@ public class Loan {
 
 
     // ===== 판단 =====
-    public boolean isReturned()
+    public boolean isReturned() {
+        return returnDate != null;  // 반납일 업데이트(not null) 되면 반납된거임.
+    }
+
+    public boolean isOverdue(LocalDate today) {
+        return (isReturned()) && (today.isAfter(dueDate));  // today.isAfter(dueDate) : today가 dueDate보다 이후의 날짜인가?
+    }
 
 
-    // ===== 추상 메소드 =====
+    // ===== 계산 =====
+    public long getOverdueDays(LocalDate date) {
+        if (date.isAfter(dueDate)) {
+            return ChronoUnit.DAYS.between(dueDate, date);  // AI: ChronoUnit.DAYS.between() : 일수 관점에서 두 날짜의 차이 일수를 구하기.
+        }
+        return 0;   // 아니면 0 반환.
+    }
 
+    public int calculateFee(LocalDate returnDate) {
+        return item.calculateLateFee((int) getOverdueDays(returnDate)); // calculateLateFee의 매개변수는 int형이다. 형 변환 캐스팅하기.
+    }
+
+
+    // ===== 변경 =====
+    public void markReturned(LocalDate date) {
+        if (isReturned()) {
+            throw new IllegalStateException("이미 반납된 대출입니다.");   // 예외 클래스 만들고 던지기: IllegalStateException
+        }
+        this.returnDate = date;
+    }
 
 }

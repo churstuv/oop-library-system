@@ -12,11 +12,11 @@ public abstract class LibraryItem implements Loanable {
 
 
     // ===== 생성자 =====
-    public LibraryItem (String id, String title, String author, ItemStatus status) {
+    public LibraryItem(String id, String title, String author) {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.status = status;
+        this.status = ItemStatus.AVAILABLE;     // 항상 처음은 대출 가능. 처음부터 대출 불가는 canBeLoaned로 확인.
     }
 
 
@@ -30,11 +30,16 @@ public abstract class LibraryItem implements Loanable {
 
     // ===== 상태 변경 =====
     public void markOnLoan() { // 비치 중일 때만 ON_LOAN으로 변경, 아니면 IllegalStateException
-
+        if (getStatus() == ItemStatus.AVAILABLE) {
+            this.status = ItemStatus.ON_LOAN;
+        }
+        else {
+            throw new IllegalStateException("이미 대출 중입니다.");
+        }
     }
 
     public void markAvailable() { // 상태를 AVAILABLE로 복구
-
+        this.status = ItemStatus.AVAILABLE;
     }
 
 
