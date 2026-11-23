@@ -3,6 +3,7 @@
 package com.library.model;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.time.LocalDate;
 
@@ -11,14 +12,13 @@ public abstract class Member {
     // ===== 필드 =====
     private final String memberId;
     private final String name;
-    private final List<Loan> activeLoans;
+    private final List<Loan> activeLoans = new ArrayList<>();       // AI: 어차피 처음 대출 리스트는 초기화 되어야 한다. 생성자에서 변경 불가로 바꿈.
 
 
     // ===== 생성자 =====
-    public Member(String memberId, String name, List<Loan> activeLoans) {
+    public Member(String memberId, String name) {
         this.memberId = memberId;
         this.name = name;
-        this.activeLoans = activeLoans;
     }
 
 
