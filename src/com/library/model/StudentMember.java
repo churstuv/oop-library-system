@@ -9,8 +9,8 @@ public class StudentMember extends Member {
 
 
     // ===== 생성자 =====
-    public StudentMember(String memberId, String name, List<Loan> activeLoans) {
-        super(memberId, name, activeLoans);
+    public StudentMember(String memberId, String name) {
+        super(memberId, name);
     }
 
 

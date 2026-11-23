@@ -9,8 +9,8 @@ public class GeneralMember extends Member {
 
 
     // ===== 생성자 =====
-    public GeneralMember(String memberId, String name, List<Loan> activeLoans) {
-        super(memberId, name, activeLoans);
+    public GeneralMember(String memberId, String name) {
+        super(memberId, name);
     }
 
 
