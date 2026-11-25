@@ -29,6 +29,12 @@ public class Book extends LibraryItem {
     }
 
 
+    @Override
+    public String getTypeName() {       // 자료 종류 이름 반환 (출력용)
+        return "도서";
+    }
+
+
     // ===== 오버라이딩: 일반 =====
     // Book은 부모 클래스의 것을 그대로 쓴다.
 }

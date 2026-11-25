@@ -2,10 +2,7 @@
 
 package com.library.ui;
 
-import com.library.model.Book;
 import com.library.model.LibraryItem;
-import com.library.model.Magazine;
-import com.library.model.ReferenceBook;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -45,18 +42,11 @@ public class ItemTableModel extends AbstractTableModel {
         LibraryItem item = items.get(row);
         switch (column) {
             case 0: return item.getId();
-            case 1: return typeName(item);
+            case 1: return item.getTypeName();     // instanceof 분기 대신 다형성
             case 2: return item.getTitle();
             case 3: return item.getAuthor();
             case 4: return item.isAvailable() ? "비치 중" : "대출 중";
             default: return null;
         }
-    }
-
-    private String typeName(LibraryItem item) {
-        if (item instanceof Book) return "도서";
-        if (item instanceof Magazine) return "잡지";
-        if (item instanceof ReferenceBook) return "참고도서";
-        return "기타";
     }
 }

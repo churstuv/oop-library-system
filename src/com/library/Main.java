@@ -10,6 +10,8 @@ import com.library.service.MemberService;
 import com.library.ui.AdminPanel;
 import com.library.ui.BookPanel;
 import com.library.ui.MainFrame;
+import com.library.ui.MemberPanel;
+import com.library.ui.OverduePanel;
 import com.library.util.SampleDataFactory;
 
 import javax.swing.SwingUtilities;
@@ -28,9 +30,8 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
             MainFrame frame = new MainFrame();
             frame.addTab("자료·대출", new BookPanel(catalog, loanService));
-            // 역할 A의 MemberPanel, OverduePanel 완성 후 아래 두 줄 추가
-            // frame.addTab("회원", new MemberPanel(...));
-            // frame.addTab("연체", new OverduePanel(...));
+            frame.addTab("회원", new MemberPanel(members, loanService, clock));
+            frame.addTab("연체", new OverduePanel(loanService, clock));
             frame.addTab("관리", new AdminPanel(catalog, members, clock));
             frame.setVisible(true);
         });

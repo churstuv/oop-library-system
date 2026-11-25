@@ -29,6 +29,12 @@ public class Magazine extends LibraryItem {
     }
 
 
+    @Override
+    public String getTypeName() {       // 자료 종류 이름 반환 (출력용)
+        return "잡지";
+    }
+
+
     // ===== 오버라이딩: 일반 =====
     @Override
     public int calculateLateFee(int overdueDays) {      // 실제 연체료 계산.

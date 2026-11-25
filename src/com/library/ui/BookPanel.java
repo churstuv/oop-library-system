@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class BookPanel extends JPanel {
+public class BookPanel extends JPanel implements Refreshable {
 
     private final CatalogService catalog;
     private final LoanService loanService;
@@ -65,6 +65,11 @@ public class BookPanel extends JPanel {
         Set<LibraryItem> result = new LinkedHashSet<>(catalog.searchByTitle(keyword));
         result.addAll(catalog.searchByAuthor(keyword));
         tableModel.setItems(new ArrayList<>(result));
+    }
+
+    @Override
+    public void refresh() {     // 탭 선택 시 현재 검색어로 목록 갱신 (관리 탭에서 등록한 자료 반영)
+        onSearch();
     }
 
     public void onBorrow() {

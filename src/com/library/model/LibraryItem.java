@@ -47,6 +47,7 @@ public abstract class LibraryItem implements Loanable {
     public abstract boolean canBeLoaned();      // 하위 클래스가 대출 가능 여부 결정 (Loanable 구현)
     public abstract int getLoanPeriodDays();    // 하위 클래스가 대출 기간 결정 (Loanable 구현)
     public abstract int getLateFeePerDay();     // 하위 클래스가 일일 연체료 결정
+    public abstract String getTypeName();       // 자료 종류 이름 반환 (출력용, 다형성)
 
 
     // ===== 일반 =====

@@ -15,16 +15,17 @@ public class MainFrame extends JFrame {
         super("도서관 도서 대출·반납 관리 시스템");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         add(tabs);
+        // 탭이 선택될 때 Refreshable 패널이면 새로고침 (연체 탭, 회원 탭 등)
+        tabs.addChangeListener(e -> {
+            if (tabs.getSelectedComponent() instanceof Refreshable panel) {
+                panel.refresh();
+            }
+        });
         setSize(900, 600);
         setLocationRelativeTo(null);
     }
 
     public void addTab(String title, JComponent panel) {
         tabs.addTab(title, panel);
-    }
-
-    // 탭 선택 변경 리스너 등록용 (예: 연체 탭 선택 시 새로고침)
-    public JTabbedPane getTabs() {
-        return tabs;
     }
 }
