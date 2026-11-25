@@ -1,9 +1,30 @@
-/*
- * MainFrame - 메인 창과 탭 구성
- * 자료(BookPanel), 회원(MemberPanel), 연체(OverduePanel), 관리(AdminPanel) 탭 4개로 창을 구성한다.
- * 연체 탭을 선택할 때마다 연체 목록을 새로고침한다.
- */
+// MainFrame - 메인 창과 탭 구성
+// 탭 패널은 Main에서 addTab()으로 추가한다.
+
 package com.library.ui;
 
-public class MainFrame {
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+
+public class MainFrame extends JFrame {
+
+    private final JTabbedPane tabs = new JTabbedPane();
+
+    public MainFrame() {
+        super("도서관 도서 대출·반납 관리 시스템");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        add(tabs);
+        setSize(900, 600);
+        setLocationRelativeTo(null);
+    }
+
+    public void addTab(String title, JComponent panel) {
+        tabs.addTab(title, panel);
+    }
+
+    // 탭 선택 변경 리스너 등록용 (예: 연체 탭 선택 시 새로고침)
+    public JTabbedPane getTabs() {
+        return tabs;
+    }
 }

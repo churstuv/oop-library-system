@@ -1,9 +1,10 @@
-/*
- * LoanLimitExceededException - 대출 권수 초과 예외
- * 회원의 현재 대출 권수가 최대 대출 권수(일반 5권, 학생 3권)에 도달한 상태에서
- * 대출을 시도하면 LoanService.borrow()에서 발생한다.
- */
+// LoanLimitExceededException - 대출 중 업무 규칙 위반 시 발생하는 예외
+
 package com.library.exception;
 
-public class LoanLimitExceededException {
+public class LoanLimitExceededException extends RuntimeException {
+
+    public LoanLimitExceededException(String message) {
+        super(message);
+    }
 }
