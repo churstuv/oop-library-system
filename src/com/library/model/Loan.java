@@ -38,7 +38,7 @@ public class Loan {
     }
 
     public boolean isOverdue(LocalDate today) {
-        return !isReturned() && today.isAfter(dueDate);  // today.isAfter(dueDate) : today가 dueDate보다 이후의 날짜인가?
+        return (!isReturned()) && (today.isAfter(dueDate));  // today.isAfter(dueDate) : today가 dueDate보다 이후의 날짜인가? / AI: isReturned() && ... 가 아니라 !isReturned() && ...이다.
     }
 
 
